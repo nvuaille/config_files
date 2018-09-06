@@ -1,3 +1,4 @@
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -10,9 +11,9 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
+-- Volume widget
+local volume_control = require("volume-control")
+local label_widget = require("label")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -39,13 +40,16 @@ do
 end
 -- }}}
 
+-- define some colors
+valueColor = "#fff000"
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
-editor = os.getenv("EDITOR") or "nano"
+terminal = "xfce4-terminal"
+editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -57,19 +61,18 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    awful.layout.suit.floating,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -102,7 +105,9 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "open terminal", terminal },
+				    { "Reboot", function () awesome.spawn("systemctl reboot"); awesome.quit() end},
+				    { "Shutdown", function () awesome.spawn("systemctl poweroff"); awesome.quit() end}
                                   }
                         })
 
@@ -121,7 +126,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
-local taglist_buttons = gears.table.join(
+local taglist_buttons = awful.util.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
                                               if client.focus then
@@ -138,7 +143,7 @@ local taglist_buttons = gears.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
 
-local tasklist_buttons = gears.table.join(
+local tasklist_buttons = awful.util.table.join(
                      awful.button({ }, 1, function (c)
                                               if c == client.focus then
                                                   c.minimized = true
@@ -187,10 +192,10 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
+    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(gears.table.join(
+    s.mylayoutbox:buttons(awful.util.table.join(
                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
@@ -200,6 +205,29 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
+
+    -- Create a volume widget
+    volumelabel = label_widget({label = 'Vol: '})
+    volumecfg = volume_control({step= '2%'})
+
+    -- Create labels
+    keyboardLabel = label_widget({label = 'Keyboard: '})
+    dateLabel = label_widget({label = 'Date: '})
+
+    -- Create a battery widget
+    batterylabel = label_widget({label = 'Battery: '})
+    batterywidget = wibox.widget.textbox()
+    batterywidget.markup = "unknown"
+    batterywidgettimer = timer({ timeout = 5 })
+    batterywidgettimer:connect_signal("timeout",
+      function()
+        fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))
+        value = fh:read("*l")
+        batterywidget.markup = "<span foreground=\"" .. valueColor .. "\"> " .. value .. " </span>"
+        fh:close()
+      end
+    )
+    batterywidgettimer:start()
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
@@ -216,9 +244,30 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            -- keyboard layout
             wibox.widget.systray(),
-            mytextclock,
+            keyboardLabel,
+            {
+              {
+                  widget = mykeyboardlayout
+              },
+              fg     = valueColor,
+              widget = wibox.container.background
+            },
+            -- volume
+            volumelabel.widget,
+            volumecfg.widget,
+            -- battery state
+            batterylabel.widget,
+            batterywidget,
+            dateLabel,
+            {
+              {
+                  widget = mytextclock
+              },
+              fg     = valueColor,
+              widget = wibox.container.background
+            },
             s.mylayoutbox,
         },
     }
@@ -226,7 +275,7 @@ end)
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(gears.table.join(
+root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
@@ -234,7 +283,7 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = gears.table.join(
+globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -315,6 +364,11 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
+    awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
+    awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
+    awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
+
+    awful.key({modkey, "Shift" }, "l", function () awful.util.spawn("xscreensaver-command -lock") end),
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
@@ -334,7 +388,7 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"})
 )
 
-clientkeys = gears.table.join(
+clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -363,26 +417,14 @@ clientkeys = gears.table.join(
             c.maximized = not c.maximized
             c:raise()
         end ,
-        {description = "(un)maximize", group = "client"}),
-    awful.key({ modkey, "Control" }, "m",
-        function (c)
-            c.maximized_vertical = not c.maximized_vertical
-            c:raise()
-        end ,
-        {description = "(un)maximize vertically", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c:raise()
-        end ,
-        {description = "(un)maximize horizontally", group = "client"})
+        {description = "maximize", group = "client"})
 )
 
 -- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it work on any keyboard layout.
+-- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-    globalkeys = gears.table.join(globalkeys,
+    globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
@@ -428,7 +470,7 @@ for i = 1, 9 do
     )
 end
 
-clientbuttons = gears.table.join(
+clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
@@ -508,7 +550,7 @@ end)
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
-    local buttons = gears.table.join(
+    local buttons = awful.util.table.join(
         awful.button({ }, 1, function()
             client.focus = c
             c:raise()
@@ -557,4 +599,6 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+awful.util.spawn_with_shell("xscreensaver -no-splash")
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 -- }}}
