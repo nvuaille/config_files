@@ -218,62 +218,62 @@ awful.screen.connect_for_each_screen(function(s)
     dateLabel = label_widget({label = 'Date: '})
 
     -- Create a battery widget
-    batterylabel = label_widget({label = 'Battery: '})
-    batterywidget = wibox.widget.textbox()
-    batterywidget.markup = "unknown"
-    batterywidgettimer = timer({ timeout = 5 })
-    batterywidgettimer:connect_signal("timeout",
-      function()
-        fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))
-        value = fh:read("*l")
-        batterywidget.markup = "<span foreground=\"" .. valueColor .. "\"> " .. value .. " </span>"
-        fh:close()
-      end
-    )
-    batterywidgettimer:start()
+    --    batterylabel = label_widget({label = 'Battery: '})
+    --    batterywidget = wibox.widget.textbox()
+    --    batterywidget.markup = "unknown"
+    --    batterywidgettimer = timer({ timeout = 5 })
+    --    batterywidgettimer:connect_signal("timeout",
+    --      function()
+    --        fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))
+    --        value = fh:read("*l")
+    --        batterywidget.markup = "<span foreground=\"" .. valueColor .. "\"> " .. value .. " </span>"
+    --        fh:close()
+    --      end
+    --    )
+    --    batterywidgettimer:start()
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            mylauncher,
-            s.mytaglist,
-            s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            -- keyboard layout
-            wibox.widget.systray(),
-            keyboardLabel,
-            {
-              {
-                  widget = mykeyboardlayout
-              },
-              fg     = valueColor,
-              widget = wibox.container.background
-            },
-            -- volume
-            volumelabel.widget,
-            volumecfg.widget,
-            -- battery state
-            batterylabel.widget,
-            batterywidget,
-            dateLabel,
-            {
-              {
-                  widget = mytextclock
-              },
-              fg     = valueColor,
-              widget = wibox.container.background
-            },
-            s.mylayoutbox,
-        },
-    }
+	    layout = wibox.layout.align.horizontal,
+	    { -- Left widgets
+	    layout = wibox.layout.fixed.horizontal,
+	    mylauncher,
+	    s.mytaglist,
+	    s.mypromptbox,
+    },
+    s.mytasklist, -- Middle widget
+    { -- Right widgets
+    layout = wibox.layout.fixed.horizontal,
+    -- keyboard layout
+    wibox.widget.systray(),
+    keyboardLabel,
+    {
+	    {
+		    widget = mykeyboardlayout
+	    },
+	    fg     = valueColor,
+	    widget = wibox.container.background
+    },
+    -- volume
+    volumelabel.widget,
+    volumecfg.widget,
+    -- battery state
+    --    batterylabel.widget,
+    --    batterywidget,
+    dateLabel,
+    {
+	    {
+		    widget = mytextclock
+	    },
+	    fg     = valueColor,
+	    widget = wibox.container.background
+    },
+    s.mylayoutbox,
+	},
+}
 end)
 -- }}}
 
