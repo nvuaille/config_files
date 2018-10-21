@@ -368,6 +368,11 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
     awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
 
+    awful.key({}, "XF86MonBrightnessUp", function() awful.util.spawn("xbacklight -inc 5")  end),
+    awful.key({}, "XF86MonBrightnessDown", function() awful.util.spawn("xbacklight -dec 5")  end),
+
+    awful.key({}, "XF86Sleep", function() awful.util.spawn("")  end),
+
     -- screen lock
     awful.key({modkey, "Shift" }, "x", function () awful.util.spawn("xscreensaver-command -lock") end),
 
