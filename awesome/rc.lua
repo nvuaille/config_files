@@ -329,7 +329,7 @@ globalkeys = awful.util.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
+    awful.key({ modkey,           }, "Return", function () awesome.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -374,7 +374,7 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86Sleep", function() awful.util.spawn("")  end),
 
     -- screen lock
-    awful.key({modkey, "Shift" }, "x", function () awful.util.spawn("xscreensaver-command -lock") end),
+    awful.key({modkey, "Shift" }, "x", function () awesome.spawn("xscreensaver-command -lock") end),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
@@ -596,6 +596,4 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
-awful.util.spawn_with_shell("xscreensaver -no-splash")
-awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 -- }}}
