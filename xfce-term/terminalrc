@@ -1,4 +1,5 @@
 [Configuration]
+FontName=Monospace 10
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBellUrgent=FALSE
@@ -14,20 +15,21 @@ MiscToolbarDefault=FALSE
 MiscConfirmClose=TRUE
 MiscCycleTabs=TRUE
 MiscTabCloseButtons=TRUE
-MiscTabCloseMiddleClick=FALSE
+MiscTabCloseMiddleClick=TRUE
 MiscTabPosition=GTK_POS_TOP
 MiscHighlightUrls=TRUE
 MiscMiddleClickOpensUri=FALSE
-MiscCopyOnSelect=TRUE
+MiscCopyOnSelect=FALSE
 MiscShowRelaunchDialog=TRUE
 MiscRewrapOnResize=TRUE
 MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=FALSE
 MiscNewTabAdjacent=FALSE
+ColorBackground=#199919991999
+ColorForeground=#f3f3f3f3f3f3
 ScrollingUnlimited=TRUE
 ScrollingOnOutput=FALSE
-FontName=Monospace 10
-ColorBackground=#2aaa2aaa2aaa
-ColorPalette=rgb(0,0,0);rgb(170,0,0);rgb(0,198,0);rgb(170,85,0);rgb(0,0,170);rgb(170,0,170);rgb(0,170,170);rgb(170,170,170);rgb(85,85,85);rgb(255,85,85);rgb(85,255,85);rgb(255,255,85);rgb(77,186,255);rgb(255,85,255);rgb(85,255,255);rgb(255,255,255)
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
+ColorPalette=rgb(0,0,0);rgb(170,0,0);rgb(0,170,0);rgb(170,85,0);rgb(69,121,255);rgb(170,0,170);rgb(0,170,170);rgb(170,170,170);rgb(85,85,85);rgb(255,85,85);rgb(85,255,85);rgb(255,255,85);rgb(119,110,224);rgb(255,85,255);rgb(85,255,255);rgb(255,255,255)
+ShortcutsNoHelpkey=TRUE
 
