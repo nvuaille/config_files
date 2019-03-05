@@ -70,6 +70,19 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# set GCC_COLORS.
+export GCC_COLORS="error=01;31:warning=01;33:note=01;36:range1=01:range2=34:locus=33:\
+quote=01:fixit-insert=01;31:fixit-delete=31:\
+diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:\
+type-diff=01;32"
+
+# default values for GCC_COLORS:
+# error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:\
+# quote=01:fixit-insert=32:fixit-delete=31:\
+# diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:\
+# type-diff=01;32
+
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
