@@ -109,3 +109,5 @@ type-diff=01;32"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias blackParaView="QT_QPA_PLATFORMTHEME=qt5ct ./bin/paraview"
+unalias grv
