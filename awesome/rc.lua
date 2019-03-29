@@ -15,6 +15,9 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local volume_control = require("volume-control")
 local label_widget = require("label")
 
+naughty.config.defaults['icon_size'] = 100
+-- beautiful.notification_icon_size=100
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
