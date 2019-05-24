@@ -1,0 +1,3 @@
+" change leader to space
+let mapleader=" "
+
