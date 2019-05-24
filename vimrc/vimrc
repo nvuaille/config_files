@@ -33,3 +33,4 @@ au BufNewFile,BufRead *.txx set filetype=cpp
 map <F10> :%s/\s\+$//e <Enter> :%s/\(\n\n\)\n\+/\1/e<Enter>
 
 nmap U <C-r>
+nmap ; :
