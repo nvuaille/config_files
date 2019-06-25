@@ -1,7 +1,7 @@
 
 " NerdTree customization
     " specify initial size of tree pane. Default is 31
-    let NERDTreeWinSize=45
+    let NERDTreeWinSize=35
 
 set shiftwidth=2
 set tabstop=2
