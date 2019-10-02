@@ -508,6 +508,7 @@ awful.rules.rules = {
           "Wpa_gui",
           "pinentry",
           "veromix",
+          "ParaView",
           "xtightvncviewer"},
 
         name = {

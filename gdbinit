@@ -1,6 +1,6 @@
 
 # customize prompt.
-#set prompt \033[1;32m > \033[m
+set prompt \033[1;32m > \033[m
 
 # save gdb history
 set history save on
@@ -17,8 +17,9 @@ set print object on
 
 
 # -----------------------------------------------
-# Define bt-colors, that print a colored backtrace 
-# 
+# Define bt-colors, that print a colored backtrace
+# no more needed
+
 # Script from https://github.com/RAttab/dotfiles/blob/master/colors.gdb
 define setup-color-pipe
     shell rm -f /tmp/gdb-color-pipe
