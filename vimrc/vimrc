@@ -1,24 +1,28 @@
-syntax on        "Turn on syntax highlighting
-set laststatus=2 "Always show status line
-
-set autowrite    "Automatically write a file when leaving a modified buffer
-set confirm      "Start a dialog when a command fails (here when quit command fails)
-set tabstop=2    "Number of spaces a TAB in the text stands for
-
-set shiftwidth=2 "Number of spaces used for each step of (auto)indent
-set hlsearch     "Have vim highlight the target of a search
-set incsearch    "Do incremental searching
-
-set ruler        "Show the cursor position all the time
+set laststatus=2           "Always show status line
 set showcmd
-set number       "Show line numbers
-set relativenumber       "Show relative line numbers
-set ignorecase   "Ignore case when searching
+
+set autowrite              "Automatically write a file when leaving a modified buffer
+set autoread               " Reload the file if changed from the outside
+set confirm                "Start a dialog when a command fails (here when quit command fails)
+
+set tabstop=2              "Number of spaces a TAB in the text stands for
+set shiftwidth=2           "Number of spaces used for each step of (auto)indent
+
+set ruler                  "Show the cursor position all the time
+set cursorline             " Change the current line background
+set scrolloff=8            " Keep 8 line above and under the current one
+set number                 "Show line numbers
+set relativenumber         "Show relative line numbers
+
+set ignorecase             "Ignore case when searching
 set smartcase
+set hlsearch               "Have vim highlight the target of a search
+set incsearch              "Do incremental searching
 
 set wildmenu
 set wildmode=longest,full
 
+syntax on                  "Turn on syntax highlighting
 "colorscheme
 set background=dark
 let g:gruvbox_contrast_dark = 'hard'
@@ -28,9 +32,6 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 au BufNewFile,BufRead *.txx set filetype=cpp
-
-" remove trailing whitespace
-map <F10> :%s/\s\+$//e <Enter> :%s/\(\n\n\)\n\+/\1/e<Enter>
 
 nmap U <C-r>
 nmap ; :
