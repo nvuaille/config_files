@@ -90,7 +90,7 @@ type-diff=01;32"
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -109,6 +109,7 @@ type-diff=01;32"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
 alias blackParaView="QT_QPA_PLATFORMTHEME=qt5ct ./bin/paraview"
 alias fzf="fzf -m"
 unalias grv
