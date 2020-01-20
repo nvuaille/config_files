@@ -110,8 +110,8 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "open terminal", terminal },
-				    { "Reboot", function () awesome.spawn("systemctl reboot"); awesome.quit() end},
-				    { "Shutdown", function () awesome.spawn("systemctl poweroff"); awesome.quit() end}
+            { "Reboot", function () awesome.spawn("systemctl reboot"); awesome.quit() end},
+            { "Shutdown", function () awesome.spawn("systemctl poweroff"); awesome.quit() end}
                                   }
                         })
 
@@ -239,12 +239,12 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Add widgets to the wibox
     s.mywibox:setup {
-	    layout = wibox.layout.align.horizontal,
-	    { -- Left widgets
-	    layout = wibox.layout.fixed.horizontal,
-	    mylauncher,
-	    s.mytaglist,
-	    s.mypromptbox,
+      layout = wibox.layout.align.horizontal,
+      { -- Left widgets
+      layout = wibox.layout.fixed.horizontal,
+      mylauncher,
+      s.mytaglist,
+      s.mypromptbox,
     },
     s.mytasklist, -- Middle widget
     { -- Right widgets
@@ -255,11 +255,11 @@ awful.screen.connect_for_each_screen(function(s)
     cpu_widget(),
     keyboardLabel,
     {
-	    {
-		    widget = mykeyboardlayout
-	    },
-	    fg     = valueColor,
-	    widget = wibox.container.background
+      {
+        widget = mykeyboardlayout
+      },
+      fg     = valueColor,
+      widget = wibox.container.background
     },
     -- volume
     volumelabel.widget,
@@ -269,14 +269,14 @@ awful.screen.connect_for_each_screen(function(s)
     --    batterywidget,
     dateLabel,
     {
-	    {
-		    widget = mytextclock
-	    },
-	    fg     = valueColor,
-	    widget = wibox.container.background
+      {
+        widget = mytextclock
+      },
+      fg     = valueColor,
+      widget = wibox.container.background
     },
     s.mylayoutbox,
-	},
+  },
 }
 end)
 -- }}}
