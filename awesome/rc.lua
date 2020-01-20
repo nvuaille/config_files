@@ -14,6 +14,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Volume widget
 local volume_control = require("volume-control")
 local label_widget = require("label")
+local cpu_widget = require("cpu-widget")
 
 naughty.config.defaults['icon_size'] = 100
 -- beautiful.notification_icon_size=100
@@ -209,13 +210,14 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
-    -- Create a volume widget
-    volumelabel = label_widget({label = 'Vol: '})
-    volumecfg = volume_control({step= '2%'})
-
     -- Create labels
+    volumelabel = label_widget({label = 'Vol: '})
     keyboardLabel = label_widget({label = 'Keyboard: '})
     dateLabel = label_widget({label = 'Date: '})
+    cpuLabel = label_widget({label = 'CPU: '})
+
+    -- Create a volume widget
+    volumecfg = volume_control({step= '2%'})
 
     -- Create a battery widget
     --    batterylabel = label_widget({label = 'Battery: '})
@@ -249,6 +251,8 @@ awful.screen.connect_for_each_screen(function(s)
     layout = wibox.layout.fixed.horizontal,
     -- keyboard layout
     wibox.widget.systray(),
+    cpuLabel.widget,
+    cpu_widget(),
     keyboardLabel,
     {
 	    {
@@ -520,7 +524,8 @@ awful.rules.rules = {
           "AlarmWindow",  -- Thunderbird's calendar.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true }},
+      }, properties = { floating = true,
+                        placement = awful.placement.centered }},
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
