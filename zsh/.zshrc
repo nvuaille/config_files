@@ -112,5 +112,6 @@ type-diff=01;32"
 
 alias blackParaView="QT_QPA_PLATFORMTHEME=qt5ct ./bin/paraview"
 alias fzf="fzf -m"
+alias feh="feh --conversion-timeout 5"
 unalias grv
 setxkbmap -option compose:ralt
