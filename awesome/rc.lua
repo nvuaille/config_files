@@ -15,6 +15,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local volume_control = require("volume-control")
 local label_widget = require("label")
 local cpu_widget = require("cpu-widget")
+local ram_widget = require("ram-widget")
 
 naughty.config.defaults['icon_size'] = 100
 -- beautiful.notification_icon_size=100
@@ -215,6 +216,7 @@ awful.screen.connect_for_each_screen(function(s)
     keyboardLabel = label_widget({label = 'Keyboard: '})
     dateLabel = label_widget({label = 'Date: '})
     cpuLabel = label_widget({label = 'CPU: '})
+    ramLabel = label_widget({label = 'Mem: '})
 
     -- Create a volume widget
     volumecfg = volume_control({step= '2%'})
@@ -251,6 +253,8 @@ awful.screen.connect_for_each_screen(function(s)
     layout = wibox.layout.fixed.horizontal,
     -- keyboard layout
     wibox.widget.systray(),
+    ramLabel.widget,
+    ram_widget(),
     cpuLabel.widget,
     cpu_widget(),
     keyboardLabel,
