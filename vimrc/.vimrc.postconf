@@ -1,7 +1,7 @@
 
 " NerdTree customization
-    " specify initial size of tree pane. Default is 31
-    let NERDTreeWinSize=35
+" specify initial size of tree pane. Default is 31
+let NERDTreeWinSize=35
 
 set shiftwidth=2
 set tabstop=2
@@ -13,3 +13,13 @@ let g:rainbow_ctermfgs = [ 'blue', 'cyan', 'yellow', 'magenta' ]
 let g:rainbow_conf['ctermfgs'] = g:rainbow_ctermfgs
 
 nmap U <C-r>
+
+" augroup vimmic_py_ale_config
+"   autocmd!
+"   autocmd FileType python :ALEDisable
+" augroup END
+
+" augroup vimmic_tex_ale_config
+"   autocmd!
+"   autocmd FileType tex :ALEDisable
+" augroup END

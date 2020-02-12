@@ -68,8 +68,9 @@ function vcontrol:init(args)
     self.lclick = args.lclick or "toggle"
     self.mclick = args.mclick or "pavucontrol"
     self.rclick = args.rclick or "pavucontrol"
+    self.color = args.color or value_color
     self.widget_text = {
-        on  = '<span foreground=\"' .. valueColor .. '\"> % 3d%% </span>',
+        on  = '<span foreground=\"' .. self.color .. '\"> % 3d%% </span>',
         off = '<span foreground=\"#ff6000\"> % 3dM </span>',
     }
     self.tooltip_text = args.tooltip_text or [[

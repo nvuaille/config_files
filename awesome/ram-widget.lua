@@ -4,18 +4,19 @@ local wibox = require("wibox")
 
 local ramgraph_widget = {}
 
-local normalColor = '#74aeab'
-local highColor = '#ffaa00'
-
 local function worker(args)
 
     local args = args or {}
+    local color1 = args.color1 or '#74aeab'
+    local color2 = args.color2 or '#ffaa00'
+    local bg_color = args.bg_color or '#26403f'
+
 
     --- Main ram widget shown on wibar
     ramgraph_widget = wibox.widget {
         border_width = 0,
         colors = {
-          normalColor, '#26403f'
+          color1, bg_color
         },
         display_labels = false,
         forced_width = 25,
@@ -67,11 +68,11 @@ local function worker(args)
             end
             if ( used / total) > 0.7  then
               widget.colors = {
-                highColor, '#26403f'
+                color2, bg_color
               }
             else
               widget.colors = {
-                normalColor, '#26403f'
+                color1, bg_color
               }
             end
         end,

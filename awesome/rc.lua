@@ -16,6 +16,7 @@ local volume_control = require("volume-control")
 local label_widget = require("label")
 local cpu_widget = require("cpu-widget")
 local ram_widget = require("ram-widget")
+-- local bat_widget = require("batteryarc")
 
 naughty.config.defaults['icon_size'] = 100
 -- beautiful.notification_icon_size=100
@@ -46,7 +47,11 @@ end
 -- }}}
 
 -- define some colors
-valueColor = "#fff000"
+base_color = "#aaaaaa"
+label_color = "#8ed1cd"
+value_color = "#f1fd8e"
+warning_color = "#fff000"
+error_color = "#ff0000"
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
@@ -213,28 +218,13 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create labels
     volumelabel = label_widget({label = 'Vol: '})
-    keyboardLabel = label_widget({label = 'Keyboard: '})
+    keyboardLabel = label_widget({label = 'Kbd: '})
     dateLabel = label_widget({label = 'Date: '})
     cpuLabel = label_widget({label = 'CPU: '})
     ramLabel = label_widget({label = 'Mem: '})
-
+    -- batterylabel = label_widget({label = 'Bat: '})
     -- Create a volume widget
     volumecfg = volume_control({step= '2%'})
-
-    -- Create a battery widget
-    --    batterylabel = label_widget({label = 'Battery: '})
-    --    batterywidget = wibox.widget.textbox()
-    --    batterywidget.markup = "unknown"
-    --    batterywidgettimer = timer({ timeout = 5 })
-    --    batterywidgettimer:connect_signal("timeout",
-    --      function()
-    --        fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))
-    --        value = fh:read("*l")
-    --        batterywidget.markup = "<span foreground=\"" .. valueColor .. "\"> " .. value .. " </span>"
-    --        fh:close()
-    --      end
-    --    )
-    --    batterywidgettimer:start()
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
@@ -253,30 +243,36 @@ awful.screen.connect_for_each_screen(function(s)
     layout = wibox.layout.fixed.horizontal,
     -- keyboard layout
     wibox.widget.systray(),
+    -- RAM usage
     ramLabel.widget,
-    ram_widget(),
+    ram_widget({color1=label_color, color2=error_color}),
+    -- cpu usage
     cpuLabel.widget,
-    cpu_widget(),
+    cpu_widget({color=label_color}),
+    -- battery state
+    -- batterylabel.widget,
+    -- bat_widget({
+    --   show_current_level=true,
+    --   main_color=value_color,
+    --   medium_level_color=warning_color,
+    --   low_level_color=error_color}),
     keyboardLabel,
     {
       {
         widget = mykeyboardlayout
       },
-      fg     = valueColor,
+      fg     = value_color,
       widget = wibox.container.background
     },
     -- volume
     volumelabel.widget,
     volumecfg.widget,
-    -- battery state
-    --    batterylabel.widget,
-    --    batterywidget,
     dateLabel,
     {
       {
         widget = mytextclock
       },
-      fg     = valueColor,
+      fg     = value_color,
       widget = wibox.container.background
     },
     s.mylayoutbox,

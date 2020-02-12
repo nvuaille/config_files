@@ -1,4 +1,3 @@
--- Volume Control
 local wibox = require("wibox")
 
 ------------------------------------------
@@ -15,6 +14,7 @@ function label:init(args)
 --    self.device = args.device or nil
 --    self.cardid  = args.cardid or nil
     self.label = args.label or ''
+    self.color = args.color or label_color
     self.widget = wibox.widget.textbox()
     self.widget.set_align("right")
     self:update()
@@ -22,8 +22,7 @@ function label:init(args)
 end
 
 function label:update()
-    local labelColor = "#0fff00"
-    self.widget.markup = ' | <span foreground=\"' .. labelColor .. '\"> '.. self.label ..' </span>'
+    self.widget.markup = ' | <span foreground=\"' .. self.color .. '\"> '.. self.label ..' </span>'
 end
 
 return setmetatable(label, {
