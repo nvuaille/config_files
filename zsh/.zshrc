@@ -115,3 +115,5 @@ alias fzf="fzf -m"
 alias feh="feh --conversion-timeout 5"
 unalias grv
 setxkbmap -option compose:ralt
+
+source /home/nicolas/.config/broot/launcher/bash/br
