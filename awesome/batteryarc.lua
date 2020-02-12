@@ -105,10 +105,8 @@ local function worker(args)
                 widget.value = charge / 100
 
                 if status == 'Charging' then
-                    text_with_background.bg = charging_color
-                    text_with_background.fg = '#000000'
+                    text_with_background.fg = charging_color
                 else
-                    text_with_background.bg = '#00000000'
                     text_with_background.fg = main_color
                 end
 
@@ -123,6 +121,7 @@ local function worker(args)
 
                 if charge < 15 then
                     widget.colors = { low_level_color }
+                    text_with_background.fg = error_color
                     if status ~= 'Charging' and os.difftime(os.time(), last_battery_check) > 300 then
                         -- if 5 minutes have elapsed since the last warning
                         last_battery_check = os.time()
