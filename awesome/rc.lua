@@ -16,7 +16,7 @@ local volume_control = require("volume-control")
 local label_widget = require("label")
 local cpu_widget = require("cpu-widget")
 local ram_widget = require("ram-widget")
--- local bat_widget = require("batteryarc")
+local bat_widget = require("batteryarc")
 
 naughty.config.defaults['icon_size'] = 100
 -- beautiful.notification_icon_size=100
@@ -222,7 +222,7 @@ awful.screen.connect_for_each_screen(function(s)
     dateLabel = label_widget({label = 'Date: '})
     cpuLabel = label_widget({label = 'CPU: '})
     ramLabel = label_widget({label = 'Mem: '})
-    -- batterylabel = label_widget({label = 'Bat: '})
+    batterylabel = label_widget({label = 'Bat: '})
     -- Create a volume widget
     volumecfg = volume_control({step= '2%'})
 
@@ -250,12 +250,12 @@ awful.screen.connect_for_each_screen(function(s)
     cpuLabel.widget,
     cpu_widget({color=label_color}),
     -- battery state
-    -- batterylabel.widget,
-    -- bat_widget({
-    --   show_current_level=true,
-    --   main_color=value_color,
-    --   medium_level_color=warning_color,
-    --   low_level_color=error_color}),
+    batterylabel.widget,
+    bat_widget({
+      show_current_level=true,
+      main_color=value_color,
+      medium_level_color=warning_color,
+      low_level_color=error_color}),
     keyboardLabel,
     {
       {
