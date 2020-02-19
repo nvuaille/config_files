@@ -173,9 +173,9 @@ lighttheme()
 # autojump
 source /etc/profile.d/autojump.sh
 
-# >>> conda initialize >>>
 # export PATH="/home/nicolas/Softwares/anaconda3/condabin:$PATH"
 
+# >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/nicolas/Softwares/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
