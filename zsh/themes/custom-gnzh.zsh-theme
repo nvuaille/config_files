@@ -1,9 +1,21 @@
 # Based on bira theme
 
+function python_env_prompt_info() {
+    if [[ $CONDA_DEFAULT_ENV ]]; then
+      # echo "%B(${CONDA_DEFAULT_ENV})%b"
+      echo "${CONDA_ENV_PREFIX}${CONDA_DEFAULT_ENV}${CONDA_ENV_SUFFIX}"
+    fi
+}
+
+
+local CONDA_ENV_PREFIX="%B("
+local CONDA_ENV_SUFFIX=")%b"
+
 setopt prompt_subst
 
 () {
 
+# local CONDA_ENV_PREFIX CONDA_ENV_SUFFIX
 local PR_USER PR_USER_OP PR_PROMPT PR_HOST
 
 # Check the UID
@@ -30,8 +42,9 @@ local return_code="%(?..%F{red}%? ↵%f)"
 local user_host="${PR_USER}%F{cyan}@${PR_HOST}"
 local current_dir="%B%F{cyan}%~%f%b"
 local git_branch='$(git_prompt_info)'
+local env_name='$(python_env_prompt_info)'
 
-PROMPT="╭─${user_host} ${current_dir} \$(ruby_prompt_info) ${git_branch}
+PROMPT="╭─${user_host} ${current_dir} \$(ruby_prompt_info) ${git_branch} ${env_name}
 ╰─$PR_PROMPT "
 RPROMPT="${return_code}"
 
