@@ -51,7 +51,7 @@ base_color = "#aaaaaa"
 label_color = "#8ed1cd"
 value_color = "#f1fd8e"
 warning_color = "#fff000"
-error_color = "#ff0000"
+error_color = "#ff6000"
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
@@ -512,10 +512,15 @@ awful.rules.rules = {
           "Wpa_gui",
           "pinentry",
           "veromix",
+          "xtightvncviewer",
+					-- custom
+					-- get it with `$ xprop | grep CLASS`
+					"feh",
+					"Matplotlib",
           "ParaView",
-          "yakyak",
           "vtk",
-          "xtightvncviewer"},
+          "yakyak"
+				},
 
         name = {
           "Event Tester",  -- xev.

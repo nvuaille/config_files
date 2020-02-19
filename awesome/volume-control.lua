@@ -69,9 +69,10 @@ function vcontrol:init(args)
     self.mclick = args.mclick or "pavucontrol"
     self.rclick = args.rclick or "pavucontrol"
     self.color = args.color or value_color
+    self.mute_color = args.mute_color or error_color
     self.widget_text = {
         on  = '<span foreground=\"' .. self.color .. '\"> % 3d%% </span>',
-        off = '<span foreground=\"#ff6000\"> % 3dM </span>',
+        off = '<span foreground=\"' .. self.mute_color .. '\"> % 3dM </span>',
     }
     self.tooltip_text = args.tooltip_text or [[
 Volume: ${volume}% ${state}
