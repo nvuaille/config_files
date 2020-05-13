@@ -338,6 +338,8 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awesome.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "Return", function () awesome.spawn(terminal .. " tmux") end,
+              {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
 
@@ -515,10 +517,12 @@ awful.rules.rules = {
           "xtightvncviewer",
 					-- custom
 					-- get it with `$ xprop | grep CLASS`
+          "Display",
 					"feh",
 					"Matplotlib",
           "ParaView",
           "vtk",
+          "Vtk",
           "yakyak"
 				},
 
