@@ -114,6 +114,32 @@ alias blackParaView="QT_QPA_PLATFORMTHEME=qt5ct ./bin/paraview"
 alias fzf="fzf -m"
 alias feh="feh --conversion-timeout 5"
 unalias grv
-setxkbmap -option compose:ralt
+alias make="make --no-print-directory"
+# alias tmux for colors : https://unix.stackexchange.com/a/355391
+alias tmux="tmux -2"
+
+# setxkbmap -option compose:ralt
+setxkbmap fr
+setxkbmap -option caps:escape
+
+export CXXFLAGS="-fdiagnostics-color=always"
+export CFLAGS="-fdiagnostics-color=always"
 
 source /home/nicolas/.config/broot/launcher/bash/br
+
+# >>> conda initialize >>>
+# export PATH="/home/nicolas/Softwares/anaconda3/condabin:$PATH"
+
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/nicolas/Softwares/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/nicolas/Softwares/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/nicolas/Softwares/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/nicolas/Softwares/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
