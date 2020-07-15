@@ -3,7 +3,7 @@
 # set prompt \033[1;32m > \033[m
 
 # save gdb history
-# set history save on
+set history save on
 
 # Do not print addresses when displaying their contents
 # set print address off

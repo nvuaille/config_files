@@ -110,7 +110,8 @@ type-diff=01;32"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias blackParaView="QT_QPA_PLATFORMTHEME=qt5ct ./bin/paraview"
+alias pv="./bin/paraview -stylesheet=/home/nicolas/ParaView/Utilities/dark_style.qss"
+alias ipvpython="PYTHONPATH=${PYTHONPATH}:/home/nicolas/ParaView/paraview/build/lib/python3.8/site-packages ipython"
 alias fzf="fzf -m"
 alias feh="feh --conversion-timeout 5"
 unalias grv
@@ -118,8 +119,8 @@ alias make="make --no-print-directory"
 # alias tmux for colors : https://unix.stackexchange.com/a/355391
 alias tmux="tmux -2"
 
-# setxkbmap -option compose:ralt
-setxkbmap fr
+setxkbmap -option compose:ralt
+# setxkbmap fr
 setxkbmap -option caps:escape
 
 export CXXFLAGS="-fdiagnostics-color=always"

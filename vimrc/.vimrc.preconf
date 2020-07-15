@@ -1,3 +1,8 @@
 " change leader to space
 let mapleader=" "
 
+" VTK files are xml
+autocmd BufRead,BufNewFile *.vt* set filetype=xml
+
+" Paraview state files are xml
+autocmd BufRead,BufNewFile *.pvsm set filetype=xml
