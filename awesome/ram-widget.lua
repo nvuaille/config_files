@@ -75,6 +75,8 @@ local function worker(args)
                 color1, bg_color
               }
             end
+
+            collectgarbage()
         end,
         ramgraph_widget
     )

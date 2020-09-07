@@ -54,6 +54,7 @@ local function worker(args)
 
                 total_prev = total
                 idle_prev = idle
+                collectgarbage()
             end,
             cpugraph_widget
     )
