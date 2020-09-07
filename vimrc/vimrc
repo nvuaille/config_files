@@ -7,13 +7,35 @@ colorscheme gruvbox
 
 au BufNewFile,BufRead *.txx set filetype=cpp
 
+" VTK files are xml
+autocmd BufRead,BufNewFile *.vt* set filetype=xml
+
+" Paraview state files are xml
+autocmd BufRead,BufNewFile *.pvsm set filetype=xml
+
 " Key bindings
 """""""""""""""""""""""""""""""""""""""
+let mapleader=" "
+
 nmap U <C-r>
 nmap ; :
-let mapleader=" "
+" browse buffer
 map <leader>j :bnext<CR>
 map <leader>k :bprevious<CR>
+
+" File browser
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+map <leader>o :Vexplore<CR>
+
+" Go to next empty line with enter
+nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+
+" Display number of search occurence
+map <leader>c :%s///gn<CR>
 
 " Editor
 """""""""""""""""""""""""""""""""""""""
@@ -55,13 +77,16 @@ set wildmode=longest,full
 set encoding=utf-8
 set fileencoding=utf-8
 
+set undofile
+
 " Plugins
 """""""""""""""""""""""""""""""""""""""
-" nice to have :
-" - nerdtree : file tree
+" nice to have:
 " - tpope commentary : toggle comments
 " - tpope surround 
 " - ctrlpvim : fuzzyfinder to open file
+" Bonus:
 " - ale : syntax checker
 " - jedi : python completion 
+" - nerdtree : file tree
 
