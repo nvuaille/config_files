@@ -1,19 +1,20 @@
-" Syntax highlighting
+" Syntax:
 """""""""""""""""""""""""""""""""""""""
+" Colorscheme
 syntax on
 set background=dark
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 
+" file types
+" txx are cpp templates
 au BufNewFile,BufRead *.txx set filetype=cpp
-
 " VTK files are xml
 autocmd BufRead,BufNewFile *.vt* set filetype=xml
-
 " Paraview state files are xml
 autocmd BufRead,BufNewFile *.pvsm set filetype=xml
 
-" Key bindings
+" Bindings:
 """""""""""""""""""""""""""""""""""""""
 let mapleader=" "
 
@@ -28,7 +29,7 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
-let g:netrw_winsize = 25
+let g:netrw_winsize = 20
 map <leader>o :Vexplore<CR>
 
 " Go to next empty line with enter
@@ -37,7 +38,7 @@ nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 " Display number of search occurence
 map <leader>c :%s///gn<CR>
 
-" Editor
+" Editor:
 """""""""""""""""""""""""""""""""""""""
 " Appearance
 set ruler                  "Show the cursor position all the time
@@ -62,7 +63,7 @@ set shiftwidth=2           "Number of spaces used for each step of (auto)indent
 set expandtab              "Tabs to spaces
 set autoindent
 
-" Misc
+" Misc:
 """""""""""""""""""""""""""""""""""""""
 set laststatus=2           "Always show status line
 set showcmd
@@ -79,14 +80,60 @@ set fileencoding=utf-8
 
 set undofile
 
-" Plugins
+" Plugins:
 """""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-commentary'
+
+  " lsp
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+call plug#end()
+
+" vim-lsp
+  function! s:on_lsp_buffer_enabled() abort
+      setlocal omnifunc=lsp#complete
+      setlocal signcolumn=yes
+      if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+      nmap <buffer> gd <plug>(lsp-definition)
+      nmap <buffer> gr <plug>(lsp-references)
+      nmap <buffer> gi <plug>(lsp-implementation)
+      nmap <buffer> gt <plug>(lsp-type-definition)
+      nmap <buffer> <leader>rn <plug>(lsp-rename)
+      nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+      nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+      nmap <buffer> K <plug>(lsp-hover)
+
+      " refer to doc to add more commands
+  endfunction
+
+  augroup lsp_install
+      au!
+      " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+      autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  augroup END
+
+  let g:lsp_highlight_references_enabled = 1
+  highlight link lspReference Underlined
+  let g:lsp_signs_enabled = 1         " enable signs
+  let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+
+" asycomplete
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+  imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+" Commentary
+  autocmd FileType c,cpp setlocal commentstring=//\ %s
+
+
 " nice to have:
-" - tpope commentary : toggle comments
-" - tpope surround 
 " - ctrlpvim : fuzzyfinder to open file
 " Bonus:
 " - ale : syntax checker
 " - jedi : python completion 
 " - nerdtree : file tree
-
