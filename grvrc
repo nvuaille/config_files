@@ -2,3 +2,4 @@ set commit-graph true
 set commit-limit 1000
 map RefView p ":giti push origin ${branch}<Enter>"
 map All ; :
+set theme classic

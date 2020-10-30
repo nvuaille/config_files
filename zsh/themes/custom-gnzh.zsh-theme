@@ -6,38 +6,40 @@ setopt prompt_subst
 
 local PR_USER PR_USER_OP PR_PROMPT PR_HOST
 
+# colors from pywal
+source ~/.cache/wal/colors.sh
+
 # Check the UID
 if [[ $UID -ne 0 ]]; then # normal user
-  PR_USER='%F{green}%n%f'
-  PR_USER_OP='%F{green}%#%f'
+  PR_USER='%F{$color2}%n%f'
+  PR_USER_OP='%F{$color2}%#%f'
   PR_PROMPT='%f➤ %f'
 else # root
-  PR_USER='%F{red}%n%f'
-  PR_USER_OP='%F{red}%#%f'
-  PR_PROMPT='%F{red}➤ %f'
+  PR_USER='%F{$color5}%n%f'
+  PR_USER_OP='%F{$color5}%#%f'
+  PR_PROMPT='%F{$color5}➤ %f'
 fi
 
 # Check if we are on SSH or not
-if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
-  PR_HOST='%F{red}%M%f' # SSH
+if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" || -n "$SSH_CONNECTION" ]]; then
+  PR_HOST='%F{$color5}%M%f' # SSH
 else
-  PR_HOST='%F{green}%M%f' # no SSH
+  PR_HOST='%F{${color2}}%M%f' # no SSH
 fi
 
+local return_code="%(?..%F{$color5}%? ↵%f)"
 
-local return_code="%(?..%F{red}%? ↵%f)"
-
-local user_host="${PR_USER}%F{cyan}@${PR_HOST}"
-local current_dir="%B%F{cyan}%~%f%b"
+local user_host="${PR_USER}%F{$color6}@${PR_HOST}"
+local current_dir="%B%F{$color6}%~%f%b"
 local git_branch='$(git_prompt_info)'
 
 PROMPT="╭─${user_host} ${current_dir} \$(ruby_prompt_info) ${git_branch}
 ╰─$PR_PROMPT "
 RPROMPT="${return_code}"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{yellow}‹"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{$color3}‹"
 ZSH_THEME_GIT_PROMPT_SUFFIX="› %f"
-ZSH_THEME_RUBY_PROMPT_PREFIX="%F{red}‹"
+ZSH_THEME_RUBY_PROMPT_PREFIX="%F{$color5}‹"
 ZSH_THEME_RUBY_PROMPT_SUFFIX="›%f"
 
 }

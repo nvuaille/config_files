@@ -128,6 +128,29 @@ export CFLAGS="-fdiagnostics-color=always"
 
 source /home/nicolas/.config/broot/launcher/bash/br
 
+# Color scheme
+# wal --theme base16-materialer
+# wal --theme base16-gruvbox-hard
+# wal --theme base16-material
+
+setTheme()
+{
+  wal --theme $1 $2
+  source ~/.zshrc
+  bat cache --build
+}
+
+darktheme()
+{
+  setTheme "base16-materialer" ""
+}
+
+lighttheme()
+{
+  setTheme "base16-gruvbox-hard" "-l"
+}
+
+
 # >>> conda initialize >>>
 # export PATH="/home/nicolas/Softwares/anaconda3/condabin:$PATH"
 

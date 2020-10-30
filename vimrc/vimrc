@@ -4,7 +4,7 @@
 syntax on
 set background=dark
 let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+" colorscheme gruvbox
 
 " file types
 " txx are cpp templates
@@ -46,7 +46,7 @@ set cursorline             "Change the current line background
 set scrolloff=8            "Keep 8 line above and under the current one
 set number                 "Show line numbers
 set relativenumber         "Show relative line numbers
-let &colorcolumn=120       "Highlight column 120
+" let &colorcolumn=120       "Highlight column 120
 "hi ColorColumn ctermbg=darkgrey guibg=darkgrey 
 
 " Features
