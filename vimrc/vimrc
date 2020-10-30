@@ -14,6 +14,9 @@ autocmd BufRead,BufNewFile *.vt* set filetype=xml
 " Paraview state files are xml
 autocmd BufRead,BufNewFile *.pvsm set filetype=xml
 
+" vifm conf is vim
+au BufRead,BufNewFile vifm* set filetype=vim
+
 " Bindings:
 """""""""""""""""""""""""""""""""""""""
 let mapleader=" "
@@ -103,9 +106,10 @@ call plug#end()
       nmap <buffer> gi <plug>(lsp-implementation)
       nmap <buffer> gt <plug>(lsp-type-definition)
       nmap <buffer> <leader>rn <plug>(lsp-rename)
-      nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
-      nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
-      nmap <buffer> K <plug>(lsp-hover)
+      nmap <buffer> <leader>p <Plug>(lsp-previous-diagnostic)
+      nmap <buffer> <leader>n <Plug>(lsp-next-diagnostic)
+      nmap <buffer> <leader>h <plug>(lsp-hover)
+      nmap <buffer> <leader>s <plug>(lsp-document-symbol)
 
       " refer to doc to add more commands
   endfunction
@@ -120,6 +124,8 @@ call plug#end()
   highlight link lspReference Underlined
   let g:lsp_signs_enabled = 1         " enable signs
   let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+  " let g:lsp_diagnostics_enabled=0
+  " nmap <leader>d :let g:lsp_diagnostics_enabled=0<CR>
 
 " asycomplete
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
