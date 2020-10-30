@@ -110,23 +110,43 @@ type-diff=01;32"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias pv="./bin/paraview -stylesheet=/home/nicolas/ParaView/Utilities/dark_style.qss"
-alias ipvpython="PYTHONPATH=${PYTHONPATH}:/home/nicolas/ParaView/paraview/build/lib/python3.8/site-packages ipython"
-alias fzf="fzf -m"
-alias feh="feh --conversion-timeout 5"
-unalias grv
-alias make="make --no-print-directory"
-# alias tmux for colors : https://unix.stackexchange.com/a/355391
-alias tmux="tmux -2"
 
+# Keyboard options
 setxkbmap -option compose:ralt
 # setxkbmap fr
 setxkbmap -option caps:escape
 
+# build-related
+alias make="make --no-print-directory"
+# force color with ninja
 export CXXFLAGS="-fdiagnostics-color=always"
 export CFLAGS="-fdiagnostics-color=always"
 
-source /home/nicolas/.config/broot/launcher/bash/br
+# defined by zsh but also stand for the Git Repo Viewer
+unalias grv
+
+# fancy ls
+unalias l
+alias l="lsd -l"
+
+# Give time to feh to convert (useful for svg)
+alias feh="feh --conversion-timeout 5"
+
+# ParaView
+alias pv="./bin/paraview -stylesheet=/home/nicolas/ParaView/Utilities/dark_style.qss"
+alias ipvpython="PYTHONPATH=${PYTHONPATH}:/home/nicolas/ParaView/paraview/build/lib/python3.8/site-packages ipython"
+
+# Fzf 
+alias fzf="fzf -m"
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+# vifm
+export PATH="${PATH}:/home/nicolas/Softwares/vifmimg"
+alias v='vifmrun .'
+
+# alias tmux for colors : https://unix.stackexchange.com/a/355391
+alias tmux="tmux -2"
 
 # Color scheme
 # wal --theme base16-materialer
@@ -150,6 +170,8 @@ lighttheme()
   setTheme "base16-gruvbox-hard" "-l"
 }
 
+# autojump
+source /etc/profile.d/autojump.sh
 
 # >>> conda initialize >>>
 # export PATH="/home/nicolas/Softwares/anaconda3/condabin:$PATH"
