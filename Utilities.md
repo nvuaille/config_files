@@ -11,5 +11,13 @@ fancy hexdump
 # fzf
 fuzzy find
 
-# nnn
-command line fine manager
+# vifm
+command line file manager
+
+# autojump
+https://github.com/wting/autojump
+`cd` for recently used directories
+
+# lsd
+https://github.com/Peltoche/lsd
+fancy alternative to `ls`
