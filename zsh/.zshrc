@@ -111,11 +111,6 @@ type-diff=01;32"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-# Keyboard options
-setxkbmap -option compose:ralt
-# setxkbmap fr
-setxkbmap -option caps:escape
-
 # build-related
 alias make="make --no-print-directory"
 # force color with ninja
@@ -142,8 +137,8 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 # vifm
-export PATH="${PATH}:/home/nicolas/Softwares/vifmimg"
-alias v='vifmrun .'
+export PATH="${PATH}:${HOME}/Softwares/vifmimg"
+alias v='vifm .'
 
 # alias tmux for colors : https://unix.stackexchange.com/a/355391
 alias tmux="tmux -2"

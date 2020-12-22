@@ -116,6 +116,7 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "open terminal", terminal },
+            { "Vivaldi", function () awesome.spawn("vivaldi-stable");end},
             { "Reboot", function () awesome.spawn("systemctl reboot"); awesome.quit() end},
             { "Shutdown", function () awesome.spawn("systemctl poweroff"); awesome.quit() end}
                                   }

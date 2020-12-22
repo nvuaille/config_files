@@ -4,7 +4,7 @@
 syntax on
 set background=dark
 let g:gruvbox_contrast_dark = 'hard'
-" colorscheme gruvbox
+colorscheme gruvbox
 
 " file types
 " txx are cpp templates
