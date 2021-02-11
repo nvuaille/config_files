@@ -110,9 +110,6 @@ type-diff=01;32"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# setxkbmap fr
-setxkbmap -option caps:escape
-
 # build-related
 alias make="make --no-print-directory"
 # force color with ninja
