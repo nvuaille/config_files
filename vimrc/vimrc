@@ -88,6 +88,7 @@ set undofile
 call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary'
+  Plug 'junegunn/vim-easy-align'
 
   " lsp
   Plug 'prabirshrestha/vim-lsp'
@@ -135,6 +136,13 @@ call plug#end()
 
 " Commentary
   autocmd FileType c,cpp setlocal commentstring=//\ %s
+
+" vim-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap <leader>a <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap <leader>a <Plug>(EasyAlign)
 
 
 " nice to have:
