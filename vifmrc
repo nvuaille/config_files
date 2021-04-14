@@ -533,4 +533,5 @@ nnoremap <f8> :delete<cr>
 
 map > :!vifmimg inc<CR>
 map < :!vifmimg dec<CR>
+nnoremap ; :
 colorscheme pywal
