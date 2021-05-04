@@ -170,6 +170,10 @@ lighttheme()
   setTheme "base16-gruvbox-hard" "-l"
 }
 
+# reset files timestamp to their last git modif
+# usage  resetToGitTime vtkSetGet.h
+resetToGitTime(){ local f;for f;do touch -d @0`git log --pretty=%at -n1 -- "$f"` "$f"; done;};
+
 # autojump
 source /etc/profile.d/autojump.sh
 
