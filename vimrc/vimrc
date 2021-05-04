@@ -41,6 +41,9 @@ nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 " Display number of search occurence
 map <leader>c :%s///gn<CR>
 
+" adding c++ print line
+nnoremap <leader>ip istd::cout <<  << std::endl;<ESC>2F<SPACE>i
+
 " Editor:
 """""""""""""""""""""""""""""""""""""""
 " Appearance
@@ -89,6 +92,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary'
   Plug 'junegunn/vim-easy-align'
+  Plug 'junegunn/fzf.vim'
 
   " lsp
   Plug 'prabirshrestha/vim-lsp'
@@ -144,9 +148,10 @@ xmap <leader>a <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <leader>a <Plug>(EasyAlign)
 
+nmap <leader>f :Files<cr>
+nmap <leader>b :Buffers<cr>
 
 " nice to have:
-" - ctrlpvim : fuzzyfinder to open file
 " Bonus:
 " - ale : syntax checker
 " - jedi : python completion 
