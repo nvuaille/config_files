@@ -11,6 +11,7 @@ let g:gruvbox_contrast_dark = 'hard'
 au BufNewFile,BufRead *.txx set filetype=cpp
 " VTK files are xml
 autocmd BufRead,BufNewFile *.vt* set filetype=xml
+autocmd BufRead,BufNewFile *.cpd set filetype=xml
 " Paraview state files are xml
 autocmd BufRead,BufNewFile *.pvsm set filetype=xml
 

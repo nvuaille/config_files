@@ -521,6 +521,7 @@ awful.rules.rules = {
 					"feh",
 					"Matplotlib",
           "ParaView",
+          "Themys",
           "vtk",
           "Vtk",
           "yakyak"
