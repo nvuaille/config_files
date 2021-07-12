@@ -2,12 +2,12 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=$HOME/.oh-my-zsh
+ZSH=/usr/share/oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="custom-gnzh"
 
 # Set list of themes to pick from when loading at random
@@ -66,6 +66,11 @@ plugins=(
   git
 )
 
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -90,7 +95,7 @@ type-diff=01;32"
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
+   export EDITOR='nvim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -136,8 +141,8 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 # vifm
-export PATH="${PATH}:/home/nicolas/Softwares/vifmimg"
-alias v='vifmrun .'
+# export PATH="${PATH}:/home/nicolas/Softwares/vifmimg"
+alias v='/home/nicolas/Softwares/vifmimg/vifmrun .'
 
 # alias tmux for colors : https://unix.stackexchange.com/a/355391
 alias tmux="tmux -2"
@@ -171,19 +176,3 @@ resetToGitTime(){ local f;for f;do touch -d @0`git log --pretty=%at -n1 -- "$f"`
 # autojump
 source /etc/profile.d/autojump.sh
 
-# export PATH="/home/nicolas/Softwares/anaconda3/condabin:$PATH"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/home/nicolas/Softwares/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/home/nicolas/Softwares/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/home/nicolas/Softwares/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/home/nicolas/Softwares/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# # <<< conda initialize <<<
