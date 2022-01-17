@@ -32,6 +32,8 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 alias vim="nvim"
 
+export DIFFPROG="nvim -d"
+
 # build-related
 alias make="make --no-print-directory"
 # force color with ninja
@@ -65,12 +67,17 @@ alias v='vifmrun .'
 # alias tmux for colors : https://unix.stackexchange.com/a/355391
 alias tmux="tmux -2"
 
+alias tt="taskwarrior-tui"
+
 # autojump
 source /etc/profile.d/autojump.sh
 
 # reset files timestamp to their last git modif
 # usage  resetToGitTime vtkSetGet.h
 resetToGitTime(){ local f;for f;do touch -d @0`git log --pretty=%at -n1 -- "$f"` "$f"; done;};
+
+# screenshot utils
+alias fshot='flameshot gui -p /home/nicolas/Tmp'
 
 # ==================== 
 # Color scheme
