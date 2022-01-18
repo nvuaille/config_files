@@ -1,9 +1,9 @@
-"""""""""""""""""""""""""""""""""""""""
 " Colorscheme
+"""""""""""""""""""""""""""""""""""""""
 syntax on
 set background=dark
 let g:gruvbox_contrast_dark = 'hard'
-" colorscheme gruvbox
+colorscheme gruvbox
 
 " file types
 " txx are cpp templates
@@ -23,20 +23,10 @@ let mapleader=" "
 
 nmap U <C-r>
 nmap ; :
+
 " browse buffer
 map <leader>j :bnext<CR>
 map <leader>k :bprevious<CR>
-
-" File browser
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 20
-map <leader>o :Vexplore<CR>
-
-" Go to next empty line with enter
-nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 
 " Display number of search occurence
 map <leader>c :%s///gn<CR>
@@ -52,8 +42,6 @@ set cursorline             "Change the current line background
 set scrolloff=8            "Keep 8 line above and under the current one
 set number                 "Show line numbers
 set relativenumber         "Show relative line numbers
-" let &colorcolumn=120       "Highlight column 120
-"hi ColorColumn ctermbg=darkgrey guibg=darkgrey 
 
 " Features
 set ignorecase             "Ignore case when searching
@@ -86,7 +74,7 @@ set fileencoding=utf-8
 
 set undofile
 
-" Plugins:
+" Plugins
 """""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
@@ -99,7 +87,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 call plug#end()
 
+" -------------------------------------
 " vim-lsp
+
+" xxx LUA code
 lua << EOF
 local nvim_lsp = require('lspconfig')
 
@@ -120,14 +111,14 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', 'gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', 'gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>i', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>rf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', '<space>s', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 end
 
@@ -143,13 +134,15 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
-" end of Lsp lua config
+" xxx end of LUA code
 
 nmap <leader>t  <Plug>(toggle-lsp-diag)
 
+" -------------------------------------
 " Commentary
   autocmd FileType c,cpp setlocal commentstring=//\ %s
 
+" -------------------------------------
 " vim-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap <leader>a <Plug>(EasyAlign)
@@ -157,5 +150,7 @@ xmap <leader>a <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap <leader>a <Plug>(EasyAlign)
 
+" -------------------------------------
+" fzf
 nmap <leader>f :Files<cr>
 nmap <leader>b :Buffers<cr>
