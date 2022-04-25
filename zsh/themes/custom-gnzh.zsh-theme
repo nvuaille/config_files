@@ -42,7 +42,7 @@ fi
 local return_code="%(?..%F{$color5}%? ↵%f)"
 
 local user_host="${PR_USER}%F{$color6}@${PR_HOST}"
-local current_dir="%B%F{$color6}%~%f%b"
+local current_dir="%B%F{$color6}%100<...<%~%<<%f%b"
 local git_branch='$(git_prompt_info)'
 local env_name='$(python_env_prompt_info)'
 

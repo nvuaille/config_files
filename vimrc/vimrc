@@ -137,6 +137,7 @@ EOF
 " xxx end of LUA code
 
 nmap <leader>t  <Plug>(toggle-lsp-diag)
+nmap <leader>h :ClangdSwitchSourceHeader<cr>
 
 " -------------------------------------
 " Commentary

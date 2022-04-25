@@ -53,7 +53,9 @@ alias feh="feh --conversion-timeout 5"
 
 # ParaView
 # alias pv="./bin/paraview -stylesheet=/home/nicolas/ParaView/Utilities/dark_style.qss"
-alias ipvpython="PYTHONPATH=${PYTHONPATH}:/home/nicolas/ParaView/releases/5.9.1/build/lib/python3.9/site-packages ipython"
+alias pv='file=/tmp/paraview/$(date +%s).log; echo writing logs at $file; ./bin/paraview --log=$file,TRACE'
+# alias pv='./bin/paraview --log=/tmp/paraview/$(date +%s).log,TRACE'
+# alias ipvpython="PYTHONPATH=${PYTHONPATH}:/home/nicolas/ParaView/releases/5.9.1/build/lib/python3.9/site-packages ipython"
 
 # Fzf 
 alias fzf="fzf -m"
