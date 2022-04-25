@@ -101,3 +101,12 @@ lighttheme()
   setTheme "base16-gruvbox-hard" "-l"
 }
 
+
+source /home/nicolas/.config/broot/launcher/bash/br
+
+# enable alias completion
+autoload -Uz compinit; compinit;
+bindkey "^Xa" _expand_alias
+zstyle ':completion:*' completer _expand_alias _complete _ignored
+zstyle ':completion:*' regular true
+
