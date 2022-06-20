@@ -34,6 +34,10 @@ map <leader>c :%s///gn<CR>
 " adding c++ print line
 nnoremap <leader>ip istd::cout <<  << std::endl;<ESC>2F<SPACE>i
 
+" spell checking
+nmap <leader>ds :setlocal nospell<CR>
+nmap <leader>es :setlocal spell spelllang=fr,en_us<CR>
+
 " Editor:
 """""""""""""""""""""""""""""""""""""""
 " Appearance
@@ -73,6 +77,10 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 set undofile
+
+" enable spell checking in markdown
+au BufRead,BufNewFile *.md setlocal spell spelllang=fr,en_us
+
 
 " Plugins
 """""""""""""""""""""""""""""""""""""""

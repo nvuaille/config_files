@@ -15,4 +15,7 @@ set print pretty on
 # When displaying a pointer to an object, identify the actual (derived) type of the object rather than the declared type, using the virtual function table.
 set print object on
 
-
+define skip
+    tbreak +1
+    jump +1
+end
